@@ -1,5 +1,7 @@
 PS: CONHECIMENTO NÃO É CRIME
 
+Video no youtube: https://www.youtube.com/watch?v=eMcfJfWHkSM
+
 Neste video iremos subir dois container`s Docker (um atacante outro vitima) usando Kali para atacar e metasploitable2 como vitima.
 
 ####### Lembrando que este ambiente é totalmente controlado e não fere nenhuma lei. #######
